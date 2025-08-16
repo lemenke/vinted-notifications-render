@@ -453,12 +453,7 @@ def api_logs():
 def web_ui_process():
     logger.info("Web UI process started")
     try:
-        import os
-        app.run(
-            host="0.0.0.0",
-            port=int(os.getenv("PORT", configuration_values.WEB_UI_PORT)),
-            debug=False
-        )
+        app.run(host='0.0.0.0', port=configuration_values.WEB_UI_PORT, debug=False)
     except (KeyboardInterrupt, SystemExit):
         logger.info("Web UI process stopped")
     except Exception as e:
