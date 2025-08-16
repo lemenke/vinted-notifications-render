@@ -49,8 +49,17 @@ class Items:
 
         try:
             # Make the request to the Vinted API
-            response = requester.get(url=api_url, params=params)
-            response.raise_for_status()
+            headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/115.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9"
+}
+
+response = requester.get(url=api_url, params=params, headers=headers)
+response.raise_for_status()
+           
 
             # Parse the response
             items = response.json()
