@@ -6,6 +6,19 @@ from logger import get_logger
 # Get logger for this module
 logger = get_logger(__name__)
 
+import os
+from db import set_parameter, get_parameter
+
+# Wczytaj dane z bazy albo z Environment Variables (Render)
+token = get_parameter('telegram_token') or os.getenv('TELEGRAM_TOKEN', '')
+chat  = get_parameter('telegram_chat_id') or os.getenv('TELEGRAM_CHAT_ID', '')
+
+# Jeśli znajdzie wartości, zapisze je w bazie (żeby UI też je widziało)
+if token:
+    set_parameter('telegram_token', token)
+if chat:
+    set_parameter('telegram_chat_id', chat)
+
 
 def process_query(query, name=None):
     """
